@@ -22,6 +22,7 @@ import com.lamz.myapplication.remote.response.DetailUserResponse
 import com.lamz.myapplication.ui.setting.SettingPreferences
 import com.lamz.myapplication.ui.setting.SettingViewModelFactory
 import com.lamz.myapplication.ui.setting.dataStore
+import kotlin.math.log
 
 class DetailActivity : AppCompatActivity() {
 
@@ -83,10 +84,12 @@ class DetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setProfileData(login: DetailUserResponse) {
-        _activityDetailBinding.tvUsername.text = login.login
-        _activityDetailBinding.tvFullName.text = login.name
-        _activityDetailBinding.tvFollower.text = resources.getString(R.string.followers, login.followers)
-        _activityDetailBinding.tvFollowing.text = resources.getString(R.string.followingAdd, login.following)
+        _activityDetailBinding.apply {
+            tvUsername.text = login.login
+            tvFullName.text = login.name
+      tvFollower.text = "${login.followers} followers"
+      tvFollowing.text = "${login.following} following"
+        }
         Glide.with(this).load(login.avatarUrl).into(_activityDetailBinding.imgProfile)
     }
 
