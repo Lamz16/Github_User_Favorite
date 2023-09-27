@@ -32,15 +32,13 @@ class DetailViewModel : ViewModel() {
         client.enqueue(object : Callback<DetailUserResponse> {
             override fun onResponse(call: Call<DetailUserResponse>, response: Response<DetailUserResponse>) {
                 _isLoading.value = false
-                if (response.isSuccessful) {
+                if (response.isSuccessful)
                     _userProfile.value = response.body()
-                } else {
-                    Log.d(TAG, "onFailure: ${response.message()}")
-                }
+
             }
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
                 _isLoading.value = false
-                Log.d(TAG, "onFailure: ${t.message}")
+
             }
         })
     }

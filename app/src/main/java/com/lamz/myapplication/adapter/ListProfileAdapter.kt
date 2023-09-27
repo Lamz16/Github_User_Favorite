@@ -35,7 +35,7 @@ class ListProfileAdapter(private val onFavoriteClick : (UserEntity)->Unit) : Lis
             ivAdd.setImageDrawable(ContextCompat.getDrawable(ivAdd.context, R.drawable.ic_favorite))
         }
         ivAdd.setOnClickListener{
-
+            notifyItemChanged(position)
             onFavoriteClick(user)
         }
     }

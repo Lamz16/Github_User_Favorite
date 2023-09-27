@@ -1,7 +1,6 @@
 package com.lamz.myapplication.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import com.lamz.myapplication.data.UserRepository
 import com.lamz.myapplication.database.UserEntity
