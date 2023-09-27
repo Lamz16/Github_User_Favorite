@@ -18,6 +18,7 @@ class FollowFragment : Fragment() {
 
     private lateinit var binding : FragmentFollowBinding
     private val detailViewModel by viewModels<DetailViewModel>()
+//     ViewModelFactory.getInstance(requireActivity())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

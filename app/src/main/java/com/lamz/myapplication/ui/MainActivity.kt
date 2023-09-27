@@ -25,8 +25,7 @@ import com.lamz.myapplication.ui.setting.dataStore
 
 class MainActivity : AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding
+    private lateinit var binding: ActivityMainBinding
 
     private val mainViewModel by viewModels<MainViewModel>{
         ViewModelFactory.getInstance(application)
@@ -35,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val pref = SettingPreferences.getInstance(application.dataStore)
         val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
@@ -55,8 +54,10 @@ class MainActivity : AppCompatActivity() {
         val userAdapter = ListProfileAdapter{user ->
             if (user.isFavorite){
                 mainViewModel.deleteFavorite(user)
+                Toast.makeText(this, "Berhasil Menghapus ${user.username} dari favorite", Toast.LENGTH_SHORT).show()
             }else{
                 mainViewModel.saveFavorite(user)
+                Toast.makeText(this, "Berhasil Menambah ${user.username} ke favorite", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -93,15 +94,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding?.rvListUser?.apply {
+        binding.rvListUser.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = userAdapter
         }
 
         /*binding searchView for set query to search user*/
-        binding?.searchBar?.inflateMenu(R.menu.option_menu)
-        binding?.searchBar?.setOnMenuItemClickListener{menuItem ->
+        with(binding){
+        searchBar.inflateMenu(R.menu.option_menu)
+        searchBar.setOnMenuItemClickListener{menuItem ->
             when(menuItem.itemId){
                 R.id.menu1 -> {
                     val intent = Intent(this@MainActivity, FavoriteActivity::class.java)
@@ -116,16 +118,16 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        binding?.searchView?.setupWithSearchBar(binding?.searchBar)
-        binding?.searchView?.editText?.setOnEditorActionListener { textView, _, _ ->
-            binding?.searchBar?.text = binding?.searchView?.text
-            mainViewModel.getAllUser(binding?.searchView?.text.toString())
+        searchView.setupWithSearchBar(binding.searchBar)
+        searchView.editText.setOnEditorActionListener { textView, _, _ ->
+            searchBar.text = searchView.text
+            mainViewModel.getAllUser(searchView.text.toString())
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(textView.windowToken, 0)
-            binding?.searchView?.hide()
+            searchView.hide()
             false
         }
-
+        }
 
     }
 
@@ -135,7 +137,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
 }
