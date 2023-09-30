@@ -22,7 +22,5 @@ interface ApiService {
     @GET("users/{username}/following")
     fun getFollowing(@Path("username")followingUrl : String, @Query("per_page") per_page: String) : Call<List<ItemsItem>>
 
-//    @GET("top-headlines?country=id&category=science")
-//    fun getUser(@Query("login") login: String): Call<DetailUserResponse>
 
 }

@@ -26,10 +26,7 @@ class FavoriteActivity : AppCompatActivity(){
         val userAdapter = ListProfileAdapter { user ->
             if (user.isFavorite) {
                 mainViewModel.deleteFavorite(user)
-                Toast.makeText(this, "Berhasil Menghapus", Toast.LENGTH_SHORT).show()
-            } else {
-                mainViewModel.saveFavorite(user)
-                Toast.makeText(this, "Berhasil Menambah", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Berhasil Menghapus ${user.username} dari favorite", Toast.LENGTH_SHORT).show()
             }
         }
 

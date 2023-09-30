@@ -13,7 +13,7 @@ class MainViewModel(private val userRepository: UserRepository): ViewModel(){
         userRepository.setFavoriteUser(favorite, false)
     }
 
-    val Loading = userRepository.isLoading
+    val loading = userRepository.isLoading
     fun getAllUser(q: String= "") = userRepository.getAllUser(q)
 
     fun getFavoriteUser() = userRepository.getAllFavoriteUser()

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -15,8 +16,10 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lamz.myapplication.R
 import com.lamz.myapplication.adapter.SectionsPagerAdapter
+import com.lamz.myapplication.database.UserEntity
 import com.lamz.myapplication.databinding.ActivityDetailBinding
 import com.lamz.myapplication.model.DetailViewModel
+import com.lamz.myapplication.model.MainViewModel
 import com.lamz.myapplication.model.SettingViewModel
 import com.lamz.myapplication.remote.response.DetailUserResponse
 import com.lamz.myapplication.ui.setting.SettingPreferences
@@ -28,6 +31,11 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var _activityDetailBinding: ActivityDetailBinding
     private val detailViewModel by viewModels<DetailViewModel>()
+
+    private val mainViewModel by viewModels<MainViewModel>{
+        ViewModelFactory.getInstance(application)
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +65,6 @@ class DetailActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
-
 
 
         supportActionBar?.elevation = 0f

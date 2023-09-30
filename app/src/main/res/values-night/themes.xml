@@ -3,6 +3,7 @@
     <style name="Base.Theme.GithubUser" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="materialSearchBarStyle">@color/black</item>
     </style>
 
     <style name="Base.TextAppearance.MaterialComponents.Subtitle2" parent="TextAppearance.AppCompat.Subhead">

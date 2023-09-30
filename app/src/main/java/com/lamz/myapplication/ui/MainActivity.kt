@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.Loading.observe(this){
+        mainViewModel.loading.observe(this){
             showLoading(it)
         }
 
@@ -67,13 +67,13 @@ class MainActivity : AppCompatActivity() {
             if (listUser != null) {
                 when (listUser) {
                     is Result.Loading -> {
-                        mainViewModel.Loading.observe(this){
+                        mainViewModel.loading.observe(this){
                             showLoading(it)
                         }
                     }
 
                     is Result.Success -> {
-                        mainViewModel.Loading.observe(this){
+                        mainViewModel.loading.observe(this){
                             showLoading(it)
                         }
                         val userData = listUser.data
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     is Result.Error -> {
-                        mainViewModel.Loading.observe(this){
+                        mainViewModel.loading.observe(this){
                             showLoading(it)
                         }
                         Toast.makeText(

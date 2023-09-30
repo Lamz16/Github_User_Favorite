@@ -17,5 +17,4 @@ class AppExecutors {
             mainThreadHandler.post(command)
         }
     }
-
 }

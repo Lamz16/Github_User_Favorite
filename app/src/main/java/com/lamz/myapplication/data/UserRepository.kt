@@ -6,7 +6,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.lamz.myapplication.database.UserDao
 import com.lamz.myapplication.database.UserEntity
+import com.lamz.myapplication.remote.response.DetailUserResponse
 import com.lamz.myapplication.remote.response.GithubResponse
+import com.lamz.myapplication.remote.retrofit.ApiConfig
 import com.lamz.myapplication.remote.retrofit.ApiService
 import com.lamz.myapplication.utils.AppExecutors
 import retrofit2.Call
@@ -22,8 +24,6 @@ class UserRepository private constructor(
     val isLoading: LiveData<Boolean> = _isLoading
 
 private val result = MediatorLiveData<Result<List<UserEntity>>>()
-
-
 
 
     fun getAllUser(q : String ): LiveData<Result<List<UserEntity>>>{
